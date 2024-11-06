@@ -1,0 +1,115 @@
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #1f2d3d; /* Fondo oscuro */
+    color: #cdd1d7; /* Texto claro */
+}
+
+h1 {
+    color: #cdd1d7;
+    margin-bottom: 20px;
+}
+
+/* Tablero de juego */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e3d52; /* Fondo de celda oscuro */
+    border-radius: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    color: #31c3bd; /* Color de la X */
+    transition: background-color 0.3s ease;
+}
+
+.cell:hover {
+    background-color: #3c4d6d; /* Fondo de celda al pasar el ratón */
+}
+
+.cell[data-value="O"] {
+    color: #f2b237; /* Color de la O */
+}
+
+/* Indicador de turno y marcador */
+#game-status {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+#scoreboard {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+#scoreboard p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3c4d6d; /* Fondo de la puntuación */
+    color: #cdd1d7;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+#scoreboard p:nth-child(1) { /* Color para el marcador de X */
+    background-color: #31c3bd;
+    color: #1f2d3d;
+}
+
+#scoreboard p:nth-child(2) { /* Color para el marcador de empate */
+    background-color: #6b7c93;
+    color: #f1f1f1;
+}
+
+#scoreboard p:nth-child(3) { /* Color para el marcador de O */
+    background-color: #f2b237;
+    color: #1f2d3d;
+}
+
+/* Botón de reinicio */
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #2e3d52;
+    color: #cdd1d7;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3c4d6d;
+}
+
+/* Colores para X y O */
+.x-color {
+    color: #31c3bd; /* Color de la X */
+}
+
+.o-color {
+    color: #f2b237; /* Color de la O */
+}
