@@ -7,13 +7,16 @@ const xWinsDisplay = document.getElementById('x-wins');
 const oWinsDisplay = document.getElementById('o-wins');
 const drawsDisplay = document.getElementById('draws');
 
-let currentPlayer = 'X';
-let gameState = ["", "", "", "", "", "", "", "", ""];
-let gameActive = true;
+const initialState = {
+    currentPlayer: 'X',
+    movements: ["", "", "", "", "", "", "", "", ""],
+    gameIsActive: true,
+    xWins: 0,
+    oWins: 0,
+    draws: 0
+}
 
-let xWins = 0;
-let oWins = 0;
-let draws = 0;
+let gameState = initialState;
 
 const winningConditions = [
     [0, 1, 2],
@@ -27,14 +30,14 @@ const winningConditions = [
 ];
 
 function switchPlayer() {
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    playerDisplay.textContent = currentPlayer;
+    gameState.currentPlayer = gameState.currentPlayer === 'X' ? 'O' : 'X';
+    playerDisplay.textContent = gameState.currentPlayer;
 }
 
 function updateScore(winner) {
-    if (winner === "X") xWins++; xWinsDisplay.textContent = xWins;
-    if (winner === "O") oWins++; oWinsDisplay.textContent = oWins;
-    if (winner === "draw") draws++; drawsDisplay.textContent = draws;
+    if (winner === "X") gameState.xWins++; xWinsDisplay.textContent = gameState.xWins;
+    if (winner === "O") gameState.oWins++; oWinsDisplay.textContent = gameState.oWins;
+    if (winner === "draw") gameState.draws++; drawsDisplay.textContent = gameState.draws;
 }
 
 function checkResult() {
@@ -42,21 +45,21 @@ function checkResult() {
 
     for (let i = 0; i < winningConditions.length; i++) {
         const [a, b, c] = winningConditions[i];
-        if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) 
+        if (gameState.movements[a] && gameState.movements[a] === gameState.movements[b] && gameState.movements[a] === gameState.movements[c]) 
         roundWon = true;
     }
 
     if (roundWon) {
-        statusText.textContent = `¡Player ${currentPlayer} wins!`;
-        updateScore(currentPlayer);
-        gameActive = false;
+        statusText.textContent = `¡Player ${gameState.currentPlayer} wins!`;
+        updateScore(gameState.currentPlayer);
+        gameState.gameIsActive = false;
         return;
     }
 
-    if (!gameState.includes("")) {
+    if (!gameState.movements.includes("")) {
         statusText.textContent = "¡Tie!";
         updateScore("draw");
-        gameActive = false;
+        gameState.gameIsActive = false;
         return;
     }
 }
@@ -65,22 +68,22 @@ function handleCellClick(e) {
     const clickedCell = e.target;
     const clickedIndex = clickedCell.getAttribute('data-index');
 
-    if (gameState[clickedIndex] !== "" || !gameActive) return;
+    if (gameState.movements[clickedIndex] !== "" || !gameState.gameIsActive) return;
 
-    gameState[clickedIndex] = currentPlayer;
+    gameState.movements[clickedIndex] = gameState.currentPlayer;
     
     // Añadir el símbolo y la clase correspondiente
-    if (currentPlayer === "O") { clickedCell.textContent = "O"; clickedCell.classList.add("o-color") }
-    if (currentPlayer === "X") { clickedCell.textContent = "X"; clickedCell.classList.add("x-color") }
+    if (gameState.currentPlayer === "O") { clickedCell.textContent = "O"; clickedCell.classList.add("o-color") }
+    if (gameState.currentPlayer === "X") { clickedCell.textContent = "X"; clickedCell.classList.add("x-color") }
 
     checkResult();
     switchPlayer();
 }
 
 function resetGame() {
-    gameState = ["", "", "", "", "", "", "", "", ""];
-    gameActive = true;
-    currentPlayer = 'X';
+    gameState.movements = ["", "", "", "", "", "", "", "", ""];
+    gameState.gameIsActive = true;
+    gameState.currentPlayer = 'X';
     playerDisplay.textContent = currentPlayer;
     statusText.textContent = `Player´s turn: ${currentPlayer}`;
     cells.forEach(cell => {
