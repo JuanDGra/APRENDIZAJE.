@@ -1,0 +1,14 @@
+RETROALIMENTACION TIC TAC TOE
+
+
+OK - NO utilizar tanto else if, mejor utilizar if y luego un return. guards conditions, se evitan tantos condicionales, no ejecuta linea por linea.
+
+OK - utilizar palabras mas descriptivas "gameIsActive"
+
+OK - utilizar función después que ya este definida antes
+
+Reforzar tema- Constantes para usar una misma variable.
+
+Se me dificulta utilizar solo clases al momento de llamarlas en el JS - En CSS utilizar solo clases no ID. O solo una de las dos pero en general solo clases.
+
+OK - Utilizar variables para CSS con colores, se utilizan en otro archivo de css.

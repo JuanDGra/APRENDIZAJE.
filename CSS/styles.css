@@ -1,3 +1,15 @@
+:root {
+    --background-color: #1f2d3d;
+    --cell-background-color: #2e3d52;
+    --cell-background-color-hover: #3c4d6d;
+    --x-color: #31c3bd;
+    --o-color: #f2b237;
+    --text-color: #cdd1d7;
+    --tie-color: #777777;
+}
+
+
+
 /* Estilo general */
 body {
     font-family: Arial, sans-serif;
@@ -7,17 +19,17 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #1f2d3d; /* Fondo oscuro */
-    color: #cdd1d7; /* Texto claro */
+    background-color: var(--background-color); /* Fondo oscuro */
+    color: var(--text-color); /* Texto claro */
 }
 
 h1 {
-    color: #cdd1d7;
+    color: var(--text-color);
     margin-bottom: 20px;
 }
 
 /* Tablero de juego */
-.game-board {
+#game-board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
@@ -29,23 +41,23 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #2e3d52; /* Fondo de celda oscuro */
+    background-color: var(--cell-background-color); /* Fondo de celda oscuro */
     border-radius: 10px;
     font-size: 2em;
     font-weight: bold;
     cursor: pointer;
     width: 100px;
     height: 100px;
-    color: #31c3bd; /* Color de la X */
+    color: var(--x-color); /* Color de la X */
     transition: background-color 0.3s ease;
 }
 
 .cell:hover {
-    background-color: #3c4d6d; /* Fondo de celda al pasar el ratón */
+    background-color: var(--cell-background-color-hover); /* Fondo de celda al pasar el ratón */
 }
 
 .cell[data-value="O"] {
-    color: #f2b237; /* Color de la O */
+    color: var(--o-color); /* Color de la O */
 }
 
 /* Indicador de turno y marcador */
@@ -67,26 +79,24 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #3c4d6d; /* Fondo de la puntuación */
-    color: #cdd1d7;
     padding: 10px;
     border-radius: 8px;
     font-weight: bold;
 }
 
 #scoreboard p:nth-child(1) { /* Color para el marcador de X */
-    background-color: #31c3bd;
-    color: #1f2d3d;
+    background-color: var(--x-color);
+    color: var(--background-color);
 }
 
 #scoreboard p:nth-child(2) { /* Color para el marcador de empate */
-    background-color: #6b7c93;
-    color: #f1f1f1;
+    background-color: var(--tie-color);
+    color: var(--text-color);
 }
 
 #scoreboard p:nth-child(3) { /* Color para el marcador de O */
-    background-color: #f2b237;
-    color: #1f2d3d;
+    background-color: var(--o-color);
+    color: var(--background-color);
 }
 
 /* Botón de reinicio */
@@ -94,22 +104,22 @@ button {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #2e3d52;
-    color: #cdd1d7;
+    background-color: var(--cell-background-color);
+    color: var(--text-color);
     border: none;
     border-radius: 8px;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #3c4d6d;
+    background-color: var(--cell-background-color-hover);
 }
 
 /* Colores para X y O */
 .x-color {
-    color: #31c3bd; /* Color de la X */
+    color: var(--x-color); /* Color de la X */
 }
 
 .o-color {
-    color: #f2b237; /* Color de la O */
+    color: var(--o-color); /* Color de la O */
 }

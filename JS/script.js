@@ -26,33 +26,15 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
-function handleCellClick(e) {
-    const clickedCell = e.target;
-    const clickedIndex = clickedCell.getAttribute('data-index');
-
-    if (gameState[clickedIndex] !== "" || !gameActive) {
-        return;
-    }
-
-    gameState[clickedIndex] = currentPlayer;
-    
-    // Añadir el símbolo y la clase correspondiente
-    if (currentPlayer === "X") {
-        clickedCell.textContent = "X";
-        clickedCell.classList.add("x-color");
-    } else {
-        clickedCell.textContent = "O";
-        clickedCell.classList.add("o-color");
-    }
-
-    checkResult();
-    switchPlayer();
-}
-
-
 function switchPlayer() {
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     playerDisplay.textContent = currentPlayer;
+}
+
+function updateScore(winner) {
+    if (winner === "X") xWins++; xWinsDisplay.textContent = xWins;
+    if (winner === "O") oWins++; oWinsDisplay.textContent = oWins;
+    if (winner === "draw") draws++; drawsDisplay.textContent = draws;
 }
 
 function checkResult() {
@@ -60,10 +42,8 @@ function checkResult() {
 
     for (let i = 0; i < winningConditions.length; i++) {
         const [a, b, c] = winningConditions[i];
-        if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
-            roundWon = true;
-            break;
-        }
+        if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) 
+        roundWon = true;
     }
 
     if (roundWon) {
@@ -81,17 +61,20 @@ function checkResult() {
     }
 }
 
-function updateScore(winner) {
-    if (winner === "X") {
-        xWins++;
-        xWinsDisplay.textContent = xWins;
-    } else if (winner === "O") {
-        oWins++;
-        oWinsDisplay.textContent = oWins;
-    } else if (winner === "draw") {
-        draws++;
-        drawsDisplay.textContent = draws;
-    }
+function handleCellClick(e) {
+    const clickedCell = e.target;
+    const clickedIndex = clickedCell.getAttribute('data-index');
+
+    if (gameState[clickedIndex] !== "" || !gameActive) return;
+
+    gameState[clickedIndex] = currentPlayer;
+    
+    // Añadir el símbolo y la clase correspondiente
+    if (currentPlayer === "O") { clickedCell.textContent = "O"; clickedCell.classList.add("o-color") }
+    if (currentPlayer === "X") { clickedCell.textContent = "X"; clickedCell.classList.add("x-color") }
+
+    checkResult();
+    switchPlayer();
 }
 
 function resetGame() {
