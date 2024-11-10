@@ -84,8 +84,8 @@ function resetGame() {
     gameState.movements = ["", "", "", "", "", "", "", "", ""];
     gameState.gameIsActive = true;
     gameState.currentPlayer = 'X';
-    playerDisplay.textContent = currentPlayer;
-    statusText.textContent = `Player´s turn: ${currentPlayer}`;
+    playerDisplay.textContent = gameState.currentPlayer;
+    statusText.textContent = `Player´s turn: ${gameState.currentPlayer}`;
     cells.forEach(cell => {
         cell.textContent = "";
         cell.classList.remove("x-color", "o-color"); // Eliminar clases de colores
